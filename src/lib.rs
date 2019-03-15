@@ -57,6 +57,9 @@ mod boxed;
 #[cfg(feature = "alloc")]
 mod vec;
 
+#[cfg(feature = "ffi")]
+pub mod ffi;
+
 use crate::{
 	bits::BitIdx,
 	pointer::BitPtr,

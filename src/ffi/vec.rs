@@ -1012,3 +1012,46 @@ fn rs_bitvec_bv_l64_set_elements(this: *mut BitVec<LittleEndian, u64>, element: 
 	if this.is_null() { return; }
 	(&mut *this).set_elements(element);
 }
+
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b08_drop(this: *mut BitVec<BigEndian, u8>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l08_drop(this: *mut BitVec<LittleEndian, u8>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b16_drop(this: *mut BitVec<BigEndian, u16>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l16_drop(this: *mut BitVec<LittleEndian, u16>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b32_drop(this: *mut BitVec<BigEndian, u32>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l32_drop(this: *mut BitVec<LittleEndian, u32>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b64_drop(this: *mut BitVec<BigEndian, u64>) {
+	drop(ptr::replace(this, BitVec::new()));
+}
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l64_drop(this: *mut BitVec<LittleEndian, u64>) {
+	drop(ptr::replace(this, BitVec::new()));
+}

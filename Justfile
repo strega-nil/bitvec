@@ -24,5 +24,5 @@ ci:
 
 foreign:
 	cargo build --features ffi
-	clang++ -std=c++11 -Iffi/ examples/foreign.cpp target/debug/libbitvec.so -o target/foreigner
+	clang++ -std=c++11 -Iffi -Ltarget/debug examples/foreign.cpp -lbitvec -o target/foreigner
 	target/foreigner

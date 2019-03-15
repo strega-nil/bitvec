@@ -41,6 +41,435 @@ use crate::{
 };
 use core::ptr;
 
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b08_empty(this: *mut *const BitSlice<BigEndian, u8>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l08_empty(this: *mut *const BitSlice<LittleEndian, u8>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b16_empty(this: *mut *const BitSlice<BigEndian, u16>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l16_empty(this: *mut *const BitSlice<LittleEndian, u16>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b32_empty(this: *mut *const BitSlice<BigEndian, u32>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l32_empty(this: *mut *const BitSlice<LittleEndian, u32>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b64_empty(this: *mut *const BitSlice<BigEndian, u64>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+/** Initializes a slice handle to be the empty slice.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l64_empty(this: *mut *const BitSlice<LittleEndian, u64>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty());
+}
+
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b08_empty_mut(this: *mut *mut BitSlice<BigEndian, u8>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l08_empty_mut(this: *mut *mut BitSlice<LittleEndian, u8>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b16_empty_mut(this: *mut *mut BitSlice<BigEndian, u16>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l16_empty_mut(this: *mut *mut BitSlice<LittleEndian, u16>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b32_empty_mut(this: *mut *mut BitSlice<BigEndian, u32>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l32_empty_mut(this: *mut *mut BitSlice<LittleEndian, u32>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b64_empty_mut(this: *mut *mut BitSlice<BigEndian, u64>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+/** Initializes a slice handle to be the empty slice.
+
+This function behaves identically to the corresponding `empty`; the only
+difference is in the mutability of the span behind the handle.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to an *uninitialized*
+  handle.
+
+# Modifies
+
+The handle to which `this` points will be modified to be a handle over the empty
+slice.
+
+# Safety
+
+If `this` is `null`, then the function will return without doing any
+initialization.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l64_empty_mut(this: *mut *mut BitSlice<LittleEndian, u64>) {
+	nullck!(this);
+	ptr::write(this, BitSlice::empty_mut());
+}
+
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` elements in the region to which `ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow an unwind across the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b08_from_span(
@@ -50,6 +479,37 @@ fn rs_bitvec_bs_b08_from_span(
 ) -> bool {
 	rs_bitvec_bs_b08_from_span_partial(this, ptr, len, 0, 8)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` elements in the region to which `ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow an unwind across the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l08_from_span(
@@ -59,6 +519,38 @@ fn rs_bitvec_bs_l08_from_span(
 ) -> bool {
 	rs_bitvec_bs_l08_from_span_partial(this, ptr, len, 0, 8)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u`16: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b16_from_span(
@@ -68,6 +560,38 @@ fn rs_bitvec_bs_b16_from_span(
 ) -> bool {
 	rs_bitvec_bs_b16_from_span_partial(this, ptr, len, 0, 16)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u`16: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l16_from_span(
@@ -77,6 +601,38 @@ fn rs_bitvec_bs_l16_from_span(
 ) -> bool {
 	rs_bitvec_bs_l16_from_span_partial(this, ptr, len, 0, 16)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b32_from_span(
@@ -86,6 +642,38 @@ fn rs_bitvec_bs_b32_from_span(
 ) -> bool {
 	rs_bitvec_bs_b32_from_span_partial(this, ptr, len, 0, 32)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l32_from_span(
@@ -95,6 +683,38 @@ fn rs_bitvec_bs_l32_from_span(
 ) -> bool {
 	rs_bitvec_bs_l32_from_span_partial(this, ptr, len, 0, 32)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
@@ -105,6 +725,38 @@ fn rs_bitvec_bs_b64_from_span(
 ) -> bool {
 	rs_bitvec_bs_b64_from_span_partial(this, ptr, len, 0, 64)
 }
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
@@ -116,6 +768,367 @@ fn rs_bitvec_bs_l64_from_span(
 	rs_bitvec_bs_l64_from_span_partial(this, ptr, len, 0, 64)
 }
 
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` elements in the region to which `ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow an unwind across the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b08_from_span_mut(
+	this: *mut *mut BitSlice<BigEndian, u8>,
+	ptr: *mut u8,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_b08_from_span_partial_mut(this, ptr, len, 0, 8)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` elements in the region to which `ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow an unwind across the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l08_from_span_mut(
+	this: *mut *mut BitSlice<LittleEndian, u8>,
+	ptr: *mut u8,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_l08_from_span_partial_mut(this, ptr, len, 0, 8)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u`16: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b16_from_span_mut(
+	this: *mut *mut BitSlice<BigEndian, u16>,
+	ptr: *mut u16,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_b16_from_span_partial_mut(this, ptr, len, 0, 16)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u`16: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l16_from_span_mut(
+	this: *mut *mut BitSlice<LittleEndian, u16>,
+	ptr: *mut u16,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_l16_from_span_partial_mut(this, ptr, len, 0, 16)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b32_from_span_mut(
+	this: *mut *mut BitSlice<BigEndian, u32>,
+	ptr: *mut u32,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_b32_from_span_partial_mut(this, ptr, len, 0, 32)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l32_from_span_mut(
+	this: *mut *mut BitSlice<LittleEndian, u32>,
+	ptr: *mut u32,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_l32_from_span_partial_mut(this, ptr, len, 0, 32)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b64_from_span_mut(
+	this: *mut *mut BitSlice<BigEndian, u64>,
+	ptr: *mut u64,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_b64_from_span_partial_mut(this, ptr, len, 0, 64)
+}
+/** Initializes a slice handle from a provided span pointer and element count.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+`ptr` points.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization
+failed. Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its
+arguments are invalid. As of Rust `1.24`, FFI boundary functions no longer
+include automatic `catch_unwind` guards which abort. Use of the FFI boundary
+functions *requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will
+return `false` before dereferencing. If this is called with invalid
+arguments, it will panic. This function does not catch any unwinding, so
+panics **must** cause abort rather than allow unwinding to cross the FFI
+boundary.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l64_from_span_mut(
+	this: *mut *mut BitSlice<LittleEndian, u64>,
+	ptr: *mut u64,
+	len: usize,
+) -> bool {
+	rs_bitvec_bs_l64_from_span_partial_mut(this, ptr, len, 0, 64)
+}
+
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` *elements* in the region to which `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b08_from_span_partial(
@@ -130,6 +1143,38 @@ fn rs_bitvec_bs_b08_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` *elements* in the region to which `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l08_from_span_partial(
@@ -144,6 +1189,39 @@ fn rs_bitvec_bs_l08_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u16`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b16_from_span_partial(
@@ -158,6 +1236,39 @@ fn rs_bitvec_bs_b16_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u16`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l16_from_span_partial(
@@ -172,6 +1283,39 @@ fn rs_bitvec_bs_l16_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_b32_from_span_partial(
@@ -186,6 +1330,39 @@ fn rs_bitvec_bs_b32_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bs_l32_from_span_partial(
@@ -200,6 +1377,39 @@ fn rs_bitvec_bs_l32_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
@@ -215,6 +1425,39 @@ fn rs_bitvec_bs_b64_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
@@ -230,850 +1473,1220 @@ fn rs_bitvec_bs_l64_from_span_partial(
 	ptr::write(this, bitslice);
 	true
 }
+/** Initializes a slice handle from provided span details.
 
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b08_empty(this: *mut *const BitSlice<BigEndian, u8>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l08_empty(this: *mut *const BitSlice<LittleEndian, u8>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b16_empty(this: *mut *const BitSlice<BigEndian, u16>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l16_empty(this: *mut *const BitSlice<LittleEndian, u16>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b32_empty(this: *mut *const BitSlice<BigEndian, u32>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l32_empty(this: *mut *const BitSlice<LittleEndian, u32>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b64_empty(this: *mut *const BitSlice<BigEndian, u64>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l64_empty(this: *mut *const BitSlice<LittleEndian, u64>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty());
-}
+# Parameters
 
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b08_empty_mut(this: *mut *mut BitSlice<BigEndian, u8>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l08_empty_mut(this: *mut *mut BitSlice<LittleEndian, u8>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b16_empty_mut(this: *mut *mut BitSlice<BigEndian, u16>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l16_empty_mut(this: *mut *mut BitSlice<LittleEndian, u16>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b32_empty_mut(this: *mut *mut BitSlice<BigEndian, u32>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l32_empty_mut(this: *mut *mut BitSlice<LittleEndian, u32>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b64_empty_mut(this: *mut *mut BitSlice<BigEndian, u64>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l64_empty_mut(this: *mut *mut BitSlice<LittleEndian, u64>) {
-	nullck!(this);
-	ptr::write(this, BitSlice::empty_mut());
-}
+- `this: *mut *const BitSlice<BigEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` *elements* in the region to which `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
 
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b08_len(this: *const *const BitSlice<BigEndian, u8>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l08_len(this: *const *const BitSlice<LittleEndian, u8>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b16_len(this: *const *const BitSlice<BigEndian, u16>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l16_len(this: *const *const BitSlice<LittleEndian, u16>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b32_len(this: *const *const BitSlice<BigEndian, u32>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l32_len(this: *const *const BitSlice<LittleEndian, u32>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_b64_len(this: *const *const BitSlice<BigEndian, u64>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
-/// Computes the length, in bits, of a bit slice behind a handle.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// The number of bits contained in the slice.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `0`.
-#[cfg(target_pointer_width = "64")]
-#[no_mangle]
-pub unsafe extern "C"
-fn rs_bitvec_bs_l64_len(this: *const *const BitSlice<LittleEndian, u64>) -> usize {
-	nullck!(this => 0);
-	(&**this).len()
-}
+# Returns
 
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_is_empty(this: *const *const BitSlice<BigEndian, u8>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_b08_from_span_partial_mut(
+	this: *mut *mut BitSlice<BigEndian, u8>,
+	ptr: *mut u8,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u8`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u8` *elements* in the region to which `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_is_empty(this: *const *const BitSlice<LittleEndian, u8>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_l08_from_span_partial_mut(
+	this: *mut *mut BitSlice<LittleEndian, u8>,
+	ptr: *mut u8,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u16`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_is_empty(this: *const *const BitSlice<BigEndian, u16>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_b16_from_span_partial_mut(
+	this: *mut *mut BitSlice<BigEndian, u16>,
+	ptr: *mut u16,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u16`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u16` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_is_empty(this: *const *const BitSlice<LittleEndian, u16>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_l16_from_span_partial_mut(
+	this: *mut *mut BitSlice<LittleEndian, u16>,
+	ptr: *mut u16,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_is_empty(this: *const *const BitSlice<BigEndian, u32>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_b32_from_span_partial_mut(
+	this: *mut *mut BitSlice<BigEndian, u32>,
+	ptr: *mut u32,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u32`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u32` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_is_empty(this: *const *const BitSlice<LittleEndian, u32>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_l32_from_span_partial_mut(
+	this: *mut *mut BitSlice<LittleEndian, u32>,
+	ptr: *mut u32,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_is_empty(this: *const *const BitSlice<BigEndian, u64>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_b64_from_span_partial_mut(
+	this: *mut *mut BitSlice<BigEndian, u64>,
+	ptr: *mut u64,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
-/// Tests if a `BitSlice` handle is empty.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this early-returns `Tristate::Error`.
+/** Initializes a slice handle from provided span details.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Write-pointer to an
+  *uninitialized* `BitSlice` handle. After this function succeeds, the handle
+  will be initialized according to the provided span arguments.
+- `ptr: *const u64`: Pointer to the region of memory over which `*this` will
+  govern after initialization.
+- `len: usize`: Count of `u64` *elements* (not bytes) in the region to which
+  `ptr` points.
+- `head: u8`: Index of the first live bit in the first element of the slice.
+- `tail: u8`: Indef of the first dead bit in the last element of the slice.
+
+# Returns
+
+`bool` of `true` if `*this` is initialized or `false` if initialization failed.
+Failure reasons are not communicated across the FFI boundary.
+
+# Panics
+
+The internal function called to initialize `*this` *may* panic if its arguments
+are invalid. As of Rust `1.24`, FFI boundary functions no longer include
+automatic `catch_unwind` guards which abort. Use of the FFI boundary functions
+*requires* compiling with `panic = abort`.
+
+# Safety
+
+If this function is called with either `this` or `ptr` as `null`, it will return
+`false` before dereferencing. If this is called with invalid arguments, it will
+panic. this function does not catch any unwinding, so panics **must** cause
+abort rather than allow unwinding to cross the FFI boundary.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_is_empty(this: *const *const BitSlice<LittleEndian, u64>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).is_empty().into()
+fn rs_bitvec_bs_l64_from_span_partial_mut(
+	this: *mut *mut BitSlice<LittleEndian, u64>,
+	ptr: *mut u64,
+	len: usize,
+	head: u8,
+	tail: u8,
+) -> bool {
+	nullck!(this, ptr => false);
+	let bitslice: &mut BitSlice<_, _> = BitPtr::new(ptr, len, head, tail).into();
+	ptr::write(this, bitslice);
+	true
 }
 
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_first(this: *const *const BitSlice<BigEndian, u8>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_b08_len(
+	this: *const *const BitSlice<BigEndian, u8>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_first(this: *const *const BitSlice<LittleEndian, u8>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_l08_len(
+	this: *const *const BitSlice<LittleEndian, u8>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_first(this: *const *const BitSlice<BigEndian, u16>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_b16_len(
+	this: *const *const BitSlice<BigEndian, u16>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_first(this: *const *const BitSlice<LittleEndian, u16>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_l16_len(
+	this: *const *const BitSlice<LittleEndian, u16>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_first(this: *const *const BitSlice<BigEndian, u32>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_b32_len(
+	this: *const *const BitSlice<BigEndian, u32>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_first(this: *const *const BitSlice<LittleEndian, u32>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_l32_len(
+	this: *const *const BitSlice<LittleEndian, u32>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_first(this: *const *const BitSlice<BigEndian, u64>) -> Tristate {
-	nullck!(this => Tristate::Error);
-	(&**this).first().into()
+fn rs_bitvec_bs_b64_len(
+	this: *const *const BitSlice<BigEndian, u64>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
 }
-/// Attempts to get the first bit in a `BitSlice`.
-///
-/// # Parameters
-///
-/// - `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, and what the first bit in
-/// `**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
-/// when `*this` is empty.
-///
-/// # Safety
-///
-/// If `this` is `null`, this function early-returns `Tristate::Error`.
+/** Computes the length, in bits, of a bit slice behind a handle.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+The number of bits contained in the slice.
+
+# Safety
+
+If `this` is `null`, then this early-returns `0`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_first(this: *const *const BitSlice<LittleEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_l64_len(
+	this: *const *const BitSlice<LittleEndian, u64>,
+) -> usize {
+	nullck!(this => 0);
+	(&**this).len()
+}
+
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b08_is_empty(
+	this: *const *const BitSlice<BigEndian, u8>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l08_is_empty(
+	this: *const *const BitSlice<LittleEndian, u8>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b16_is_empty(
+	this: *const *const BitSlice<BigEndian, u16>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l16_is_empty(
+	this: *const *const BitSlice<LittleEndian, u16>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b32_is_empty(
+	this: *const *const BitSlice<BigEndian, u32>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l32_is_empty(
+	this: *const *const BitSlice<LittleEndian, u32>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b64_is_empty(
+	this: *const *const BitSlice<BigEndian, u64>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+/** Tests if a `BitSlice` handle is empty.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and `*this` is empty.
+
+# Safety
+
+If `this` is `null`, then this early-returns `Tristate::Error`.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l64_is_empty(
+	this: *const *const BitSlice<LittleEndian, u64>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).is_empty().into()
+}
+
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u8>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b08_first(
+	this: *const *const BitSlice<BigEndian, u8>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u8>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l08_first(
+	this: *const *const BitSlice<LittleEndian, u8>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u16>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b16_first(
+	this: *const *const BitSlice<BigEndian, u16>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u16>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l16_first(
+	this: *const *const BitSlice<LittleEndian, u16>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u32>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b32_first(
+	this: *const *const BitSlice<BigEndian, u32>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u32>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l32_first(
+	this: *const *const BitSlice<LittleEndian, u32>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<BigEndian, u64>`: Const-pointer to a `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_b64_first(
+	this: *const *const BitSlice<BigEndian, u64>,
+) -> Tristate {
+	nullck!(this => Tristate::Error);
+	(&**this).first().into()
+}
+/** Attempts to get the first bit in a `BitSlice`.
+
+# Parameters
+
+- `this: *const *const BitSlice<LittleEndian, u64>`: Const-pointer to a
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, and what the first bit in
+`**this` is. `Tristate::Error` can be returned when `this` is `null` *or*
+when `*this` is empty.
+
+# Safety
+
+If `this` is `null`, this function early-returns `Tristate::Error`.
+**/
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bs_l64_first(
+	this: *const *const BitSlice<LittleEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).first().into()
 }
 
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<BigEndian, u8>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u8>`: Pointer to a mutable `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_split_first(this: *mut *const BitSlice<BigEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_b08_split_first(
+	this: *mut *const BitSlice<BigEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<LittleEndian, u8>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Pointer to a mutable
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_split_first(this: *mut *const BitSlice<LittleEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_l08_split_first(
+	this: *mut *const BitSlice<LittleEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<BigEndian, u16>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Pointer to a mutable `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_split_first(this: *mut *const BitSlice<BigEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_b16_split_first(
+	this: *mut *const BitSlice<BigEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<LittleEndian, u16>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Pointer to a mutable
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_split_first(this: *mut *const BitSlice<LittleEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_l16_split_first(
+	this: *mut *const BitSlice<LittleEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<BigEndian, u32>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Pointer to a mutable `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_split_first(this: *mut *const BitSlice<BigEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_b32_split_first(
+	this: *mut *const BitSlice<BigEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<LittleEndian, u32>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Pointer to a mutable
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_split_first(this: *mut *const BitSlice<LittleEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_l32_split_first(
+	this: *mut *const BitSlice<LittleEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<BigEndian, 64u>`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, 64u>`: Pointer to a mutable `BitSlice`
+  handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_split_first(this: *mut *const BitSlice<BigEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_b64_split_first(
+	this: *mut *const BitSlice<BigEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a `BitSlice` after its first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *const BitSlice<LittleEndian, u64n >`: Pointer to a mutable
-///   `BitSlice` handle of immutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
-/// the first bit in `**this`.
-///
-/// # Modifies
-///
-/// If the split successfully occured, then the handle to which `this` points is
-/// modified in the caller’s scope. If `*this` is empty, then the split does not
-/// occur.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a `BitSlice` after its first bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64n >`: Pointer to a mutable
+  `BitSlice` handle of immutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether `this` is valid, `*this` is not-empty, and
+the first bit in `**this`.
+
+# Modifies
+
+If the split successfully occured, then the handle to which `this` points is
+modified in the caller’s scope. If `*this` is empty, then the split does not
+occur.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_split_first(this: *mut *const BitSlice<LittleEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_l64_split_first(
+	this: *mut *const BitSlice<LittleEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_first().map(|(bit, slice)| {
 		*this = slice;
@@ -1081,242 +2694,258 @@ fn rs_bitvec_bs_l64_split_first(this: *mut *const BitSlice<LittleEndian, u64>) -
 	}).into()
 }
 
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<BigEndian, u8>`: Pointer to a mutable `BitSlice`
-///   handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u8>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_split_first_mut(this: *mut *mut BitSlice<BigEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_b08_split_first_mut(
+	this: *mut *mut BitSlice<BigEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<LittleEndian, u8>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u8>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_split_first_mut(this: *mut *mut BitSlice<LittleEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_l08_split_first_mut(
+	this: *mut *mut BitSlice<LittleEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<BigEndian, u16>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u16>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_split_first_mut(this: *mut *mut BitSlice<BigEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_b16_split_first_mut(
+	this: *mut *mut BitSlice<BigEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<LittleEndian, u16>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u16>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_split_first_mut(this: *mut *mut BitSlice<LittleEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_l16_split_first_mut(
+	this: *mut *mut BitSlice<LittleEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<BigEndian, u32>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u32>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_split_first_mut(this: *mut *mut BitSlice<BigEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_b32_split_first_mut(
+	this: *mut *mut BitSlice<BigEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<LittleEndian, u32>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u32>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_split_first_mut(this: *mut *mut BitSlice<LittleEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_l32_split_first_mut(
+	this: *mut *mut BitSlice<LittleEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<BigEndian, u64>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u64>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_split_first_mut(this: *mut *mut BitSlice<BigEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_b64_split_first_mut(
+	this: *mut *mut BitSlice<BigEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
-/// Attempts to split a mutable `BitSlice` after the first bit.
-///
-/// # Parameters
-///
-/// - `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to a mutable
-///   `BitSlice` handle of mutable bits.
-///
-/// # Returns
-///
-/// A `Tristate` boolean of whether the split succeeded and what the first bit
-/// in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
-///
-/// # Modifies
-///
-/// If the split succeeded, then the handle pointed to by `this` is modified to
-/// no longer include the first bit. If `*this` is empty, then it is *not*
-/// modified.
-///
-/// # Safety
-///
-/// If `this` is `null`, then this function early-returns `Tristate::Error`.
+/** Attempts to split a mutable `BitSlice` after the first bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the first bit
+in the slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the first bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_split_first_mut(this: *mut *mut BitSlice<LittleEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_l64_split_first_mut(
+	this: *mut *mut BitSlice<LittleEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_first_mut().map(|(bit, slice)| {
 		*this = slice;
@@ -1324,74 +2953,258 @@ fn rs_bitvec_bs_l64_split_first_mut(this: *mut *mut BitSlice<LittleEndian, u64>)
 	}).into()
 }
 
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u8>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_split_last(this: *mut *const BitSlice<BigEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_b08_split_last(
+	this: *mut *const BitSlice<BigEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u8>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_split_last(this: *mut *const BitSlice<LittleEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_l08_split_last(
+	this: *mut *const BitSlice<LittleEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u16>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_split_last(this: *mut *const BitSlice<BigEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_b16_split_last(
+	this: *mut *const BitSlice<BigEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u16>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_split_last(this: *mut *const BitSlice<LittleEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_l16_split_last(
+	this: *mut *const BitSlice<LittleEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u32>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_split_last(this: *mut *const BitSlice<BigEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_b32_split_last(
+	this: *mut *const BitSlice<BigEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u32>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_split_last(this: *mut *const BitSlice<LittleEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_l32_split_last(
+	this: *mut *const BitSlice<LittleEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<BigEndian, u64>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_split_last(this: *mut *const BitSlice<BigEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_b64_split_last(
+	this: *mut *const BitSlice<BigEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *const BitSlice<LittleEndian, u64>`: Pointer to a mutable
+  `BitSlice` handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was. If `*this` is empty, then this returns `Tristate::Error`.
+
+# Modifies
+
+If the split succeeded, then the handle to which `this` points is modified to no
+longer include the last bit. If `*this` is empty, then it is *not* modified.
+
+# Safety
+
+If `this` is `null`, then this function early-returns `Tristate::Error`.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_split_last(this: *mut *const BitSlice<LittleEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_l64_split_last(
+	this: *mut *const BitSlice<LittleEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&**this).split_last().map(|(bit, slice)| {
 		*this = slice;
@@ -1399,74 +3212,186 @@ fn rs_bitvec_bs_l64_split_last(this: *mut *const BitSlice<LittleEndian, u64>) ->
 	}).into()
 }
 
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u8>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b08_split_last_mut(this: *mut *mut BitSlice<BigEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_b08_split_last_mut(
+	this: *mut *mut BitSlice<BigEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u8>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l08_split_last_mut(this: *mut *mut BitSlice<LittleEndian, u8>) -> Tristate {
+fn rs_bitvec_bs_l08_split_last_mut(
+	this: *mut *mut BitSlice<LittleEndian, u8>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u16>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b16_split_last_mut(this: *mut *mut BitSlice<BigEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_b16_split_last_mut(
+	this: *mut *mut BitSlice<BigEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u16>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l16_split_last_mut(this: *mut *mut BitSlice<LittleEndian, u16>) -> Tristate {
+fn rs_bitvec_bs_l16_split_last_mut(
+	this: *mut *mut BitSlice<LittleEndian, u16>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u32>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b32_split_last_mut(this: *mut *mut BitSlice<BigEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_b32_split_last_mut(
+	this: *mut *mut BitSlice<BigEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u32>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l32_split_last_mut(this: *mut *mut BitSlice<LittleEndian, u32>) -> Tristate {
+fn rs_bitvec_bs_l32_split_last_mut(
+	this: *mut *mut BitSlice<LittleEndian, u32>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<BigEndian, u64>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_b64_split_last_mut(this: *mut *mut BitSlice<BigEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_b64_split_last_mut(
+	this: *mut *mut BitSlice<BigEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;
 		bit
 	}).into()
 }
+/** Attempts to split a mutable `BitSlice` before its last bit.
+
+# Parameters
+
+- `this: *mut *mut BitSlice<LittleEndian, u64>`: Pointer to a mutable `BitSlice`
+  handle of mutable bits.
+
+# Returns
+
+A `Tristate` boolean of whether the split succeeded and what the last bit in the
+slice was.
+**/
 #[cfg(target_pointer_width = "64")]
 #[no_mangle]
 pub unsafe extern "C"
-fn rs_bitvec_bs_l64_split_last_mut(this: *mut *mut BitSlice<LittleEndian, u64>) -> Tristate {
+fn rs_bitvec_bs_l64_split_last_mut(
+	this: *mut *mut BitSlice<LittleEndian, u64>,
+) -> Tristate {
 	nullck!(this => Tristate::Error);
 	(&mut **this).split_last_mut().map(|(bit, slice)| {
 		*this = slice;

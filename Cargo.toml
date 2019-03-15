@@ -30,9 +30,21 @@ default = [
 std = [
 	"alloc",
 ]
+ffi = []
 testing = [
 	"std",
 ]
+
+[lib]
+name = "bitvec"
+crate-type = [
+	"cdylib",
+	"rlib",
+	"staticlib",
+]
+
+[profile.release]
+panic = "abort"
 
 [badges.codecov]
 repository = "myrrlyn/bitvec"

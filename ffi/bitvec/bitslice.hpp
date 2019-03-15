@@ -153,7 +153,7 @@ static auto const split_last = std::array<split_last_t *, 8>{{
 	reinterpret_cast<split_last_t *>(rs_bitvec_bs_l64_split_last),
 }};
 
-using last_t = auto(BitPtrImmut *) -> Tristate;
+using last_t = auto(BitPtrImmut const *) -> Tristate;
 static auto const last = std::array<last_t *, 8>{{
 	reinterpret_cast<last_t *>(rs_bitvec_bs_b08_last),
 	reinterpret_cast<last_t *>(rs_bitvec_bs_l08_last),
@@ -165,7 +165,7 @@ static auto const last = std::array<last_t *, 8>{{
 	reinterpret_cast<last_t *>(rs_bitvec_bs_l64_last),
 }};
 
-using get_t = auto(BitPtrImmut *, std::size_t) -> Tristate;
+using get_t = auto(BitPtrImmut const *, std::size_t) -> Tristate;
 static auto const get = std::array<get_t *, 8>{{
 	reinterpret_cast<get_t *>(rs_bitvec_bs_b08_get),
 	reinterpret_cast<get_t *>(rs_bitvec_bs_l08_get),
@@ -177,7 +177,7 @@ static auto const get = std::array<get_t *, 8>{{
 	reinterpret_cast<get_t *>(rs_bitvec_bs_l64_get),
 }};
 
-using set_t = void(BitPtrMut *, std::size_t, bool);
+using set_t = void(BitPtrMut const *, std::size_t, bool);
 static auto const set = std::array<set_t *, 8>{{
 	reinterpret_cast<set_t *>(rs_bitvec_bs_b08_set),
 	reinterpret_cast<set_t *>(rs_bitvec_bs_l08_set),
@@ -189,7 +189,7 @@ static auto const set = std::array<set_t *, 8>{{
 	reinterpret_cast<set_t *>(rs_bitvec_bs_l64_set),
 }};
 
-using as_ptr_t = auto(BitPtrImmut *) -> void const *;
+using as_ptr_t = auto(BitPtrImmut const *) -> void const *;
 static auto const as_ptr = std::array<as_ptr_t *, 8>{{
 	reinterpret_cast<as_ptr_t *>(rs_bitvec_bs_b08_as_ptr),
 	reinterpret_cast<as_ptr_t *>(rs_bitvec_bs_l08_as_ptr),
@@ -201,7 +201,7 @@ static auto const as_ptr = std::array<as_ptr_t *, 8>{{
 	reinterpret_cast<as_ptr_t *>(rs_bitvec_bs_l64_as_ptr),
 }};
 
-using as_mut_ptr_t = auto(BitPtrMut *) -> void *;
+using as_mut_ptr_t = auto(BitPtrMut const *) -> void *;
 static auto const as_mut_ptr = std::array<as_mut_ptr_t *, 8>{{
 	reinterpret_cast<as_mut_ptr_t *>(rs_bitvec_bs_b08_as_mut_ptr),
 	reinterpret_cast<as_mut_ptr_t *>(rs_bitvec_bs_l08_as_mut_ptr),
@@ -213,7 +213,7 @@ static auto const as_mut_ptr = std::array<as_mut_ptr_t *, 8>{{
 	reinterpret_cast<as_mut_ptr_t *>(rs_bitvec_bs_l64_as_mut_ptr),
 }};
 
-using swap_t = void(BitPtrMut *, std::size_t, std::size_t);
+using swap_t = void(BitPtrMut const *, std::size_t, std::size_t);
 static auto const swap = std::array<swap_t *, 8>{{
 	reinterpret_cast<swap_t *>(rs_bitvec_bs_b08_swap),
 	reinterpret_cast<swap_t *>(rs_bitvec_bs_l08_swap),
@@ -225,7 +225,7 @@ static auto const swap = std::array<swap_t *, 8>{{
 	reinterpret_cast<swap_t *>(rs_bitvec_bs_l64_swap),
 }};
 
-using reverse_t = void(BitPtrMut *);
+using reverse_t = void(BitPtrMut const *);
 static auto const reverse = std::array<reverse_t *, 8>{{
 	reinterpret_cast<reverse_t *>(rs_bitvec_bs_b08_reverse),
 	reinterpret_cast<reverse_t *>(rs_bitvec_bs_l08_reverse),
@@ -261,7 +261,7 @@ static auto const split_at_mut = std::array<split_at_mut_t *, 8>{{
 	reinterpret_cast<split_at_mut_t *>(rs_bitvec_bs_l64_split_at_mut),
 }};
 
-using rotate_left_t = void(BitPtrMut *, std::size_t);
+using rotate_left_t = void(BitPtrMut const *, std::size_t);
 static auto const rotate_left = std::array<rotate_left_t *, 8>{{
 	reinterpret_cast<rotate_left_t *>(rs_bitvec_bs_b08_rotate_left),
 	reinterpret_cast<rotate_left_t *>(rs_bitvec_bs_l08_rotate_left),
@@ -273,7 +273,7 @@ static auto const rotate_left = std::array<rotate_left_t *, 8>{{
 	reinterpret_cast<rotate_left_t *>(rs_bitvec_bs_l64_rotate_left),
 }};
 
-using rotate_right_t = void(BitPtrMut *, std::size_t);
+using rotate_right_t = void(BitPtrMut const *, std::size_t);
 static auto const rotate_right = std::array<rotate_right_t *, 8>{{
 	reinterpret_cast<rotate_right_t *>(rs_bitvec_bs_b08_rotate_right),
 	reinterpret_cast<rotate_right_t *>(rs_bitvec_bs_l08_rotate_right),
@@ -285,7 +285,7 @@ static auto const rotate_right = std::array<rotate_right_t *, 8>{{
 	reinterpret_cast<rotate_right_t *>(rs_bitvec_bs_l64_rotate_right),
 }};
 
-using all_t = auto(BitPtrImmut *) -> bool;
+using all_t = auto(BitPtrImmut const *) -> bool;
 static auto const all = std::array<all_t *, 8>{{
 	reinterpret_cast<all_t *>(rs_bitvec_bs_b08_all),
 	reinterpret_cast<all_t *>(rs_bitvec_bs_l08_all),
@@ -297,7 +297,7 @@ static auto const all = std::array<all_t *, 8>{{
 	reinterpret_cast<all_t *>(rs_bitvec_bs_l64_all),
 }};
 
-using any_t = auto(BitPtrImmut *) -> bool;
+using any_t = auto(BitPtrImmut const *) -> bool;
 static auto const any = std::array<any_t *, 8>{{
 	reinterpret_cast<any_t *>(rs_bitvec_bs_b08_any),
 	reinterpret_cast<any_t *>(rs_bitvec_bs_l08_any),
@@ -309,7 +309,7 @@ static auto const any = std::array<any_t *, 8>{{
 	reinterpret_cast<any_t *>(rs_bitvec_bs_l64_any),
 }};
 
-using not_all_t = auto(BitPtrImmut *) -> bool;
+using not_all_t = auto(BitPtrImmut const *) -> bool;
 static auto const not_all = std::array<not_all_t *, 8>{{
 	reinterpret_cast<not_all_t *>(rs_bitvec_bs_b08_not_all),
 	reinterpret_cast<not_all_t *>(rs_bitvec_bs_l08_not_all),
@@ -321,7 +321,7 @@ static auto const not_all = std::array<not_all_t *, 8>{{
 	reinterpret_cast<not_all_t *>(rs_bitvec_bs_l64_not_all),
 }};
 
-using not_any_t = auto(BitPtrImmut *) -> bool;
+using not_any_t = auto(BitPtrImmut const *) -> bool;
 static auto const not_any = std::array<not_any_t *, 8>{{
 	reinterpret_cast<not_any_t *>(rs_bitvec_bs_b08_not_any),
 	reinterpret_cast<not_any_t *>(rs_bitvec_bs_l08_not_any),
@@ -333,7 +333,7 @@ static auto const not_any = std::array<not_any_t *, 8>{{
 	reinterpret_cast<not_any_t *>(rs_bitvec_bs_l64_not_any),
 }};
 
-using some_t = auto(BitPtrImmut *) -> bool;
+using some_t = auto(BitPtrImmut const *) -> bool;
 static auto const some = std::array<some_t *, 8>{{
 	reinterpret_cast<some_t *>(rs_bitvec_bs_b08_some),
 	reinterpret_cast<some_t *>(rs_bitvec_bs_l08_some),
@@ -345,7 +345,7 @@ static auto const some = std::array<some_t *, 8>{{
 	reinterpret_cast<some_t *>(rs_bitvec_bs_l64_some),
 }};
 
-using count_ones_t = auto(BitPtrImmut *) -> std::size_t;
+using count_ones_t = auto(BitPtrImmut const *) -> std::size_t;
 static auto const count_ones = std::array<count_ones_t *, 8>{{
 	reinterpret_cast<count_ones_t *>(rs_bitvec_bs_b08_count_ones),
 	reinterpret_cast<count_ones_t *>(rs_bitvec_bs_l08_count_ones),
@@ -357,7 +357,7 @@ static auto const count_ones = std::array<count_ones_t *, 8>{{
 	reinterpret_cast<count_ones_t *>(rs_bitvec_bs_l64_count_ones),
 }};
 
-using count_zeros_t = auto(BitPtrImmut *) -> std::size_t;
+using count_zeros_t = auto(BitPtrImmut const *) -> std::size_t;
 static auto const count_zeros = std::array<count_zeros_t *, 8>{{
 	reinterpret_cast<count_zeros_t *>(rs_bitvec_bs_b08_count_zeros),
 	reinterpret_cast<count_zeros_t *>(rs_bitvec_bs_l08_count_zeros),
@@ -369,7 +369,7 @@ static auto const count_zeros = std::array<count_zeros_t *, 8>{{
 	reinterpret_cast<count_zeros_t *>(rs_bitvec_bs_l64_count_zeros),
 }};
 
-using set_all_t = void(BitPtrMut *, bool);
+using set_all_t = void(BitPtrMut const *, bool);
 static auto const set_all = std::array<set_all_t *, 8>{{
 	reinterpret_cast<set_all_t *>(rs_bitvec_bs_b08_set_all),
 	reinterpret_cast<set_all_t *>(rs_bitvec_bs_l08_set_all),
@@ -381,7 +381,7 @@ static auto const set_all = std::array<set_all_t *, 8>{{
 	reinterpret_cast<set_all_t *>(rs_bitvec_bs_l64_set_all),
 }};
 
-using as_slice_t = auto(BitPtrImmut *, std::size_t *) -> void const *;
+using as_slice_t = auto(BitPtrImmut const *, std::size_t *) -> void const *;
 static auto const as_slice = std::array<as_slice_t *, 8>{{
 	reinterpret_cast<as_slice_t *>(rs_bitvec_bs_b08_as_slice),
 	reinterpret_cast<as_slice_t *>(rs_bitvec_bs_l08_as_slice),
@@ -393,7 +393,7 @@ static auto const as_slice = std::array<as_slice_t *, 8>{{
 	reinterpret_cast<as_slice_t *>(rs_bitvec_bs_l64_as_slice),
 }};
 
-using as_mut_slice_t = auto(BitPtrMut *, std::size_t *) -> void *;
+using as_mut_slice_t = auto(BitPtrMut const *, std::size_t *) -> void *;
 static auto const as_mut_slice = std::array<as_mut_slice_t *, 8>{{
 	reinterpret_cast<as_mut_slice_t *>(rs_bitvec_bs_b08_as_mut_slice),
 	reinterpret_cast<as_mut_slice_t *>(rs_bitvec_bs_l08_as_mut_slice),
@@ -413,7 +413,7 @@ static auto const as_mut_slice = std::array<as_mut_slice_t *, 8>{{
  *
  * @brief Selects the bit ordering cursor for bit handles to use.
  */
-enum class Cursor : std::size_t {
+enum class Cursor : bool {
 	/// Big-endian bit ordering: increases indices from MSb to LSb.
 	BigEndian = 0,
 	/// Little-endian bit ordering: increases indices from LSb to MSb.

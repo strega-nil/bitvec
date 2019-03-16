@@ -11,7 +11,7 @@ namespace bitvec {
 #include <stddef.h>
 #include <stdint.h>
 
-#include <bitslice.h>
+#include <bitvec/bitslice.h>
 
 struct BitVec {
 	union BitPtr bp;
@@ -1179,6 +1179,55 @@ extern void rs_bitvec_bv_b64_set_elements(struct BitVec *const self, const unsig
  * @param element The element to use when setting the backing storage.
  */
 extern void rs_bitvec_bv_l64_set_elements(struct BitVec *const self, const unsigned long long int element);
+
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_b08_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_l08_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_b16_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_l16_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_b32_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_l32_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_b64_clone_from(struct BitVec *const self, const struct BitVec *const other);
+/**
+ * @brief Clones a saurce bit vector into a destination handle.
+ * @param[out] self Pointer to the destination handle which will become a clone.
+ * @param[in] other Pointer to the source handle from which the clone occurs.
+ */
+extern void rs_bitvec_bv_l64_clone_from(struct BitVec *const self, const struct BitVec *const other);
 
 /**
  * @brief Destroys the `BitVec` to which `self` points.

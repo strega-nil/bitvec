@@ -5,35 +5,38 @@
  * @file bitvec/bitslice.h
  *
  * @brief Bindings to the `BitSlice` type family functions.
+ *
+ * This file has the following sections:
+ *
+ * 1. Definitions of FFI types. These types are used in the signatures of the
+ *    FFI function declarations in C, and definitions in Rust.
+ *
+ * 2. Definitions of C wrappers. These types are to be used in C as wrappers
+ *    over the FFI types. The FFI types have no semantic information; the
+ *    wrappers add this information.
+ *
+ * 3. Declarations of all the Rust FFI signatures. These signatures match the
+ *    functions defined, and symbol-exported, in the Rust library's `ffi`
+ *    module.
  */
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
+//  This file is built to be a polyglot C and C++ header. When read as C++, it
+//  must match the layout of `bitvec.hpp`.
 #ifdef __cplusplus
 namespace rust {
 namespace bitvec {
+//  Ensure that all the types and functions laid out in this file have C-ABI
+//  linkage and mangling specifications.
 extern "C" {
 #endif
 
-/**
- * @enum Tristate
- *
- * @brief C encoding of Rust `Option<bool>`.
- *
- * This enumeration is the return value for functions which intend to return a
- * `bool` but may fail to do so. Functions which intend to return `void` but may
- * fail return `bool` as a success signal.
- */
-enum Tristate {
-	/// The function failed to operate. Rust: `None`
-	Error = -1,
-	/// The function succeeded, and returned `false`. Rust: `Some(false)`.
-	False = 0,
-	/// The function succeeded, and returned `true`. Rust: `Some(true)`.
-	True = 1,
-};
+// -----------------------------------------------------------------------------
+// # 1. FFI Type Definitions
+// -----------------------------------------------------------------------------
 
 /**
  * @struct BitPtrImmut
@@ -47,6 +50,10 @@ enum Tristate {
  * laid out below.
  */
 struct BitPtrImmut {
+#ifdef __cplusplus
+//  If this is being used in C++, prevent direct external access to the fields.
+protected:
+#endif
 	/// Mangled pointer to the slice region.
 	const void * ptr;
 	/// Mangled length of the slice region.
@@ -65,6 +72,10 @@ struct BitPtrImmut {
  * laid out below.
  */
 struct BitPtrMut {
+#ifdef __cplusplus
+//  If this is being used in C++, prevent direct external access to the fields.
+protected:
+#endif
 	/// Mangled pointer to the slice region.
 	void * ptr;
 	/// Mangled length of the slice region.
@@ -78,7 +89,9 @@ struct BitPtrMut {
  *
  * This function constrains the slice from changing its width.
  */
-const struct BitPtrImmut * const rsbv_bitptr_freeze(const struct BitPtrMut * const self) {
+const struct BitPtrImmut * const rsbv_bitptr_freeze(
+	const struct BitPtrMut * const self
+) {
 	return (const struct BitPtrImmut * const)(const void * const)self;
 }
 
@@ -89,7 +102,9 @@ const struct BitPtrImmut * const rsbv_bitptr_freeze(const struct BitPtrMut * con
  *
  * This function does not constrain the slice from changing its width.
  */
-struct BitPtrImmut * const rsbv_bitptr_freeze_mut(struct BitPtrMut * const self) {
+struct BitPtrImmut * const rsbv_bitptr_freeze_mut(
+	struct BitPtrMut * const self
+) {
 	return (struct BitPtrImmut * const)(void * const)self;
 }
 
@@ -104,6 +119,28 @@ union BitPtr {
 	struct BitPtrImmut immut;
 	/// Pointer to mutable bits.
 	struct BitPtrMut mut;
+};
+
+// -----------------------------------------------------------------------------
+// # 2. Wrapper Type Definitions
+// -----------------------------------------------------------------------------
+
+/**
+ * @enum Tristate
+ *
+ * @brief C encoding of Rust `Option<bool>`.
+ *
+ * This enumeration is the return value for functions which intend to return a
+ * `bool` but may fail to do so. Functions which intend to return `void` but may
+ * fail return `bool` as a success signal.
+ */
+enum Tristate {
+	/// The function failed to operate. Rust: `None`
+	Error = -1,
+	/// The function succeeded, and returned `false`. Rust: `Some(false)`.
+	False = 0,
+	/// The function succeeded, and returned `true`. Rust: `Some(true)`.
+	True = 1,
 };
 
 /**
@@ -229,6 +266,12 @@ struct HBitSliceL64 {
  */
 #define RSBV_HBS_MUT(rsbvhbs) &(rsbvhbs.bp.mut)
 
+// -----------------------------------------------------------------------------
+// # 3. FFI Binding Declarations
+// -----------------------------------------------------------------------------
+
+//  ## 3.1 BitSlice::<C, T>::empty
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -236,6 +279,7 @@ struct HBitSliceL64 {
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b08_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -243,6 +287,7 @@ extern void rs_bitvec_bs_b08_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l08_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -250,6 +295,7 @@ extern void rs_bitvec_bs_l08_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b16_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -257,6 +303,7 @@ extern void rs_bitvec_bs_b16_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l16_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -264,6 +311,7 @@ extern void rs_bitvec_bs_l16_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b32_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -271,6 +319,7 @@ extern void rs_bitvec_bs_b32_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l32_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -278,6 +327,7 @@ extern void rs_bitvec_bs_l32_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b64_empty(struct BitPtrImmut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -293,6 +343,7 @@ extern void rs_bitvec_bs_l64_empty(struct BitPtrImmut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b08_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -300,6 +351,7 @@ extern void rs_bitvec_bs_b08_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l08_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -307,6 +359,7 @@ extern void rs_bitvec_bs_l08_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b16_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -314,6 +367,7 @@ extern void rs_bitvec_bs_b16_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l16_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -321,6 +375,7 @@ extern void rs_bitvec_bs_l16_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b32_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -328,6 +383,7 @@ extern void rs_bitvec_bs_b32_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l32_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -335,6 +391,7 @@ extern void rs_bitvec_bs_l32_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_b64_empty_mut(struct BitPtrMut *const self);
+
 /**
  * @brief Initializes a `BitSlice` handle to govern the empty slice.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. If this is
@@ -342,6 +399,7 @@ extern void rs_bitvec_bs_b64_empty_mut(struct BitPtrMut *const self);
  * initialized to the empty slice.
  */
 extern void rs_bitvec_bs_l64_empty_mut(struct BitPtrMut *const self);
+
 
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
@@ -361,6 +419,7 @@ extern bool rs_bitvec_bs_b08_from_span(
 	const uint8_t  *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -379,6 +438,7 @@ extern bool rs_bitvec_bs_l08_from_span(
 	const uint8_t  *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -397,6 +457,7 @@ extern bool rs_bitvec_bs_b16_from_span(
 	const uint16_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -415,6 +476,7 @@ extern bool rs_bitvec_bs_l16_from_span(
 	const uint16_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -433,6 +495,7 @@ extern bool rs_bitvec_bs_b32_from_span(
 	const uint32_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -451,6 +514,7 @@ extern bool rs_bitvec_bs_l32_from_span(
 	const uint32_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -469,6 +533,7 @@ extern bool rs_bitvec_bs_b64_from_span(
 	const uint64_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -506,6 +571,7 @@ extern bool rs_bitvec_bs_b08_from_span_mut(
 	uint8_t  *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -524,6 +590,7 @@ extern bool rs_bitvec_bs_l08_from_span_mut(
 	uint8_t  *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -542,6 +609,7 @@ extern bool rs_bitvec_bs_b16_from_span_mut(
 	uint16_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -560,6 +628,7 @@ extern bool rs_bitvec_bs_l16_from_span_mut(
 	uint16_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -578,6 +647,7 @@ extern bool rs_bitvec_bs_b32_from_span_mut(
 	uint32_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -596,6 +666,7 @@ extern bool rs_bitvec_bs_l32_from_span_mut(
 	uint32_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -614,6 +685,7 @@ extern bool rs_bitvec_bs_b64_from_span_mut(
 	uint64_t *const ptr,
 	const size_t len
 );
+
 /**
  * @brief Initializes a slice handle from a provided span pointer and element
  * count.
@@ -659,6 +731,7 @@ extern bool rs_bitvec_bs_b08_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -685,6 +758,7 @@ extern bool rs_bitvec_bs_l08_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -711,6 +785,7 @@ extern bool rs_bitvec_bs_b16_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -737,6 +812,7 @@ extern bool rs_bitvec_bs_l16_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -763,6 +839,7 @@ extern bool rs_bitvec_bs_b32_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -789,6 +866,7 @@ extern bool rs_bitvec_bs_l32_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -815,6 +893,7 @@ extern bool rs_bitvec_bs_b64_from_span_partial(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -868,6 +947,7 @@ extern bool rs_bitvec_bs_b08_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -894,6 +974,7 @@ extern bool rs_bitvec_bs_l08_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -920,6 +1001,7 @@ extern bool rs_bitvec_bs_b16_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -946,6 +1028,7 @@ extern bool rs_bitvec_bs_l16_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -972,6 +1055,7 @@ extern bool rs_bitvec_bs_b32_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -998,6 +1082,7 @@ extern bool rs_bitvec_bs_l32_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -1024,6 +1109,7 @@ extern bool rs_bitvec_bs_b64_from_span_partial_mut(
 	const uint8_t head,
 	const uint8_t tail
 );
+
 /**
  * @brief Initializes a slice handle from provided span details.
  * @param[out] self Pointer to an uninitialized `BitSlice` handle. After this
@@ -1057,42 +1143,49 @@ extern bool rs_bitvec_bs_l64_from_span_partial_mut(
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_b08_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_l08_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_b16_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_l16_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_b32_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_l32_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
  * @return The length of the bit slice governed by `self`.
  */
 extern size_t rs_bitvec_bs_b64_len(const struct BitPtrImmut *const self);
+
 /**
  * @brief Gets the length of the bit slice that a handle governs.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1111,6 +1204,7 @@ extern size_t rs_bitvec_bs_l64_len(const struct BitPtrImmut *const self);
 extern enum Tristate rs_bitvec_bs_b08_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1122,6 +1216,7 @@ extern enum Tristate rs_bitvec_bs_b08_is_empty(
 extern enum Tristate rs_bitvec_bs_l08_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1133,6 +1228,7 @@ extern enum Tristate rs_bitvec_bs_l08_is_empty(
 extern enum Tristate rs_bitvec_bs_b16_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1144,6 +1240,7 @@ extern enum Tristate rs_bitvec_bs_b16_is_empty(
 extern enum Tristate rs_bitvec_bs_l16_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1155,6 +1252,7 @@ extern enum Tristate rs_bitvec_bs_l16_is_empty(
 extern enum Tristate rs_bitvec_bs_b32_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1166,6 +1264,7 @@ extern enum Tristate rs_bitvec_bs_b32_is_empty(
 extern enum Tristate rs_bitvec_bs_l32_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1177,6 +1276,7 @@ extern enum Tristate rs_bitvec_bs_l32_is_empty(
 extern enum Tristate rs_bitvec_bs_b64_is_empty(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if a handle governs an empty bit slice.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1200,6 +1300,7 @@ extern enum Tristate rs_bitvec_bs_l64_is_empty(
 extern enum Tristate rs_bitvec_bs_b08_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1211,6 +1312,7 @@ extern enum Tristate rs_bitvec_bs_b08_first(
 extern enum Tristate rs_bitvec_bs_l08_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1222,6 +1324,7 @@ extern enum Tristate rs_bitvec_bs_l08_first(
 extern enum Tristate rs_bitvec_bs_b16_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1233,6 +1336,7 @@ extern enum Tristate rs_bitvec_bs_b16_first(
 extern enum Tristate rs_bitvec_bs_l16_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1244,6 +1348,7 @@ extern enum Tristate rs_bitvec_bs_l16_first(
 extern enum Tristate rs_bitvec_bs_b32_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1255,6 +1360,7 @@ extern enum Tristate rs_bitvec_bs_b32_first(
 extern enum Tristate rs_bitvec_bs_l32_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1266,6 +1372,7 @@ extern enum Tristate rs_bitvec_bs_l32_first(
 extern enum Tristate rs_bitvec_bs_b64_first(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the first bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1293,6 +1400,7 @@ extern enum Tristate rs_bitvec_bs_l64_first(
 extern enum Tristate rs_bitvec_bs_b08_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1308,6 +1416,7 @@ extern enum Tristate rs_bitvec_bs_b08_split_first(
 extern enum Tristate rs_bitvec_bs_l08_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1323,6 +1432,7 @@ extern enum Tristate rs_bitvec_bs_l08_split_first(
 extern enum Tristate rs_bitvec_bs_b16_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1338,6 +1448,7 @@ extern enum Tristate rs_bitvec_bs_b16_split_first(
 extern enum Tristate rs_bitvec_bs_l16_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1353,6 +1464,7 @@ extern enum Tristate rs_bitvec_bs_l16_split_first(
 extern enum Tristate rs_bitvec_bs_b32_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1368,6 +1480,7 @@ extern enum Tristate rs_bitvec_bs_b32_split_first(
 extern enum Tristate rs_bitvec_bs_l32_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1383,6 +1496,7 @@ extern enum Tristate rs_bitvec_bs_l32_split_first(
 extern enum Tristate rs_bitvec_bs_b64_split_first(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1414,6 +1528,7 @@ extern enum Tristate rs_bitvec_bs_l64_split_first(
 extern enum Tristate rs_bitvec_bs_b08_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1429,6 +1544,7 @@ extern enum Tristate rs_bitvec_bs_b08_split_first_mut(
 extern enum Tristate rs_bitvec_bs_l08_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1444,6 +1560,7 @@ extern enum Tristate rs_bitvec_bs_l08_split_first_mut(
 extern enum Tristate rs_bitvec_bs_b16_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1459,6 +1576,7 @@ extern enum Tristate rs_bitvec_bs_b16_split_first_mut(
 extern enum Tristate rs_bitvec_bs_l16_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1474,6 +1592,7 @@ extern enum Tristate rs_bitvec_bs_l16_split_first_mut(
 extern enum Tristate rs_bitvec_bs_b32_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1489,6 +1608,7 @@ extern enum Tristate rs_bitvec_bs_b32_split_first_mut(
 extern enum Tristate rs_bitvec_bs_l32_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1504,6 +1624,7 @@ extern enum Tristate rs_bitvec_bs_l32_split_first_mut(
 extern enum Tristate rs_bitvec_bs_b64_split_first_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle after the first bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1535,6 +1656,7 @@ extern enum Tristate rs_bitvec_bs_l64_split_first_mut(
 extern enum Tristate rs_bitvec_bs_b08_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1550,6 +1672,7 @@ extern enum Tristate rs_bitvec_bs_b08_split_last(
 extern enum Tristate rs_bitvec_bs_l08_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1565,6 +1688,7 @@ extern enum Tristate rs_bitvec_bs_l08_split_last(
 extern enum Tristate rs_bitvec_bs_b16_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1580,6 +1704,7 @@ extern enum Tristate rs_bitvec_bs_b16_split_last(
 extern enum Tristate rs_bitvec_bs_l16_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1595,6 +1720,7 @@ extern enum Tristate rs_bitvec_bs_l16_split_last(
 extern enum Tristate rs_bitvec_bs_b32_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1610,6 +1736,7 @@ extern enum Tristate rs_bitvec_bs_b32_split_last(
 extern enum Tristate rs_bitvec_bs_l32_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1625,6 +1752,7 @@ extern enum Tristate rs_bitvec_bs_l32_split_last(
 extern enum Tristate rs_bitvec_bs_b64_split_last(
 	struct BitPtrImmut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of const bits.
@@ -1656,6 +1784,7 @@ extern enum Tristate rs_bitvec_bs_l64_split_last(
 extern enum Tristate rs_bitvec_bs_b08_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1671,6 +1800,7 @@ extern enum Tristate rs_bitvec_bs_b08_split_last_mut(
 extern enum Tristate rs_bitvec_bs_l08_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1686,6 +1816,7 @@ extern enum Tristate rs_bitvec_bs_l08_split_last_mut(
 extern enum Tristate rs_bitvec_bs_b16_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1701,6 +1832,7 @@ extern enum Tristate rs_bitvec_bs_b16_split_last_mut(
 extern enum Tristate rs_bitvec_bs_l16_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1716,6 +1848,7 @@ extern enum Tristate rs_bitvec_bs_l16_split_last_mut(
 extern enum Tristate rs_bitvec_bs_b32_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1731,6 +1864,7 @@ extern enum Tristate rs_bitvec_bs_b32_split_last_mut(
 extern enum Tristate rs_bitvec_bs_l32_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1746,6 +1880,7 @@ extern enum Tristate rs_bitvec_bs_l32_split_last_mut(
 extern enum Tristate rs_bitvec_bs_b64_split_last_mut(
 	struct BitPtrMut *const self
 );
+
 /**
  * @brief Splits the bit slice governed by the handle before the last bit.
  * @param[in,out] self Pointer to a mutable handle of mutable bits.
@@ -1773,6 +1908,7 @@ extern enum Tristate rs_bitvec_bs_l64_split_last_mut(
 extern enum Tristate rs_bitvec_bs_b08_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1784,6 +1920,7 @@ extern enum Tristate rs_bitvec_bs_b08_last(
 extern enum Tristate rs_bitvec_bs_l08_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1795,6 +1932,7 @@ extern enum Tristate rs_bitvec_bs_l08_last(
 extern enum Tristate rs_bitvec_bs_b16_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1806,6 +1944,7 @@ extern enum Tristate rs_bitvec_bs_b16_last(
 extern enum Tristate rs_bitvec_bs_l16_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1817,6 +1956,7 @@ extern enum Tristate rs_bitvec_bs_l16_last(
 extern enum Tristate rs_bitvec_bs_b32_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1828,6 +1968,7 @@ extern enum Tristate rs_bitvec_bs_b32_last(
 extern enum Tristate rs_bitvec_bs_l32_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1839,6 +1980,7 @@ extern enum Tristate rs_bitvec_bs_l32_last(
 extern enum Tristate rs_bitvec_bs_b64_last(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets the last bit in the bit slice governed by a handle.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1865,6 +2007,7 @@ extern enum Tristate rs_bitvec_bs_b08_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1879,6 +2022,7 @@ extern enum Tristate rs_bitvec_bs_l08_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1893,6 +2037,7 @@ extern enum Tristate rs_bitvec_bs_b16_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1907,6 +2052,7 @@ extern enum Tristate rs_bitvec_bs_l16_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1921,6 +2067,7 @@ extern enum Tristate rs_bitvec_bs_b32_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1935,6 +2082,7 @@ extern enum Tristate rs_bitvec_bs_l32_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1949,6 +2097,7 @@ extern enum Tristate rs_bitvec_bs_b64_get(
 	const struct BitPtrImmut *const self,
 	const size_t index
 );
+
 /**
  * @brief Gets the value of the bit at the specified index.
  * @param[in] self Pointer to a `const` handle of const bits.
@@ -1978,6 +2127,7 @@ extern void rs_bitvec_bs_b08_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -1992,6 +2142,7 @@ extern void rs_bitvec_bs_l08_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2006,6 +2157,7 @@ extern void rs_bitvec_bs_b16_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2020,6 +2172,7 @@ extern void rs_bitvec_bs_l16_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2034,6 +2187,7 @@ extern void rs_bitvec_bs_b32_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2048,6 +2202,7 @@ extern void rs_bitvec_bs_l32_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2062,6 +2217,7 @@ extern void rs_bitvec_bs_b64_set(
 	const size_t index,
 	const bool value
 );
+
 /**
  * @brief Sets a bit in the slice at the given index to the given value.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2086,6 +2242,7 @@ extern void rs_bitvec_bs_l64_set(
 extern const uint8_t  *const rs_bitvec_bs_b08_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first byte underlying the bit slice governed by
  * a handle.
@@ -2095,6 +2252,7 @@ extern const uint8_t  *const rs_bitvec_bs_b08_as_ptr(
 extern const uint8_t  *const rs_bitvec_bs_l08_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first two bytes underlying the bit slice
  * governed by a handle.
@@ -2104,6 +2262,7 @@ extern const uint8_t  *const rs_bitvec_bs_l08_as_ptr(
 extern const uint16_t *const rs_bitvec_bs_b16_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first two bytes underlying the bit slice
  * governed by a handle.
@@ -2113,6 +2272,7 @@ extern const uint16_t *const rs_bitvec_bs_b16_as_ptr(
 extern const uint16_t *const rs_bitvec_bs_l16_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first four bytes underlying the bit slice
  * governed by a handle.
@@ -2122,6 +2282,7 @@ extern const uint16_t *const rs_bitvec_bs_l16_as_ptr(
 extern const uint32_t *const rs_bitvec_bs_b32_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first four bytes underlying the bit slice
  * governed by a handle.
@@ -2131,6 +2292,7 @@ extern const uint32_t *const rs_bitvec_bs_b32_as_ptr(
 extern const uint32_t *const rs_bitvec_bs_l32_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first eight bytes underlying the bit slice
  * governed by a handle.
@@ -2140,6 +2302,7 @@ extern const uint32_t *const rs_bitvec_bs_l32_as_ptr(
 extern const uint64_t *const rs_bitvec_bs_b64_as_ptr(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Gets a pointer to the first eight bytes underlying the bit slice
  * governed by a handle.
@@ -2159,6 +2322,7 @@ extern const uint64_t *const rs_bitvec_bs_l64_as_ptr(
 extern       uint8_t  *const rs_bitvec_bs_b08_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first byte underlying the bit slice governed by
  * a handle.
@@ -2168,6 +2332,7 @@ extern       uint8_t  *const rs_bitvec_bs_b08_as_mut_ptr(
 extern       uint8_t  *const rs_bitvec_bs_l08_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first two bytes underlying the bit slice
  * governed by a handle.
@@ -2177,6 +2342,7 @@ extern       uint8_t  *const rs_bitvec_bs_l08_as_mut_ptr(
 extern       uint16_t *const rs_bitvec_bs_b16_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first two bytes underlying the bit slice
  * governed by a handle.
@@ -2186,6 +2352,7 @@ extern       uint16_t *const rs_bitvec_bs_b16_as_mut_ptr(
 extern       uint16_t *const rs_bitvec_bs_l16_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first four bytes underlying the bit slice
  * governed by a handle.
@@ -2195,6 +2362,7 @@ extern       uint16_t *const rs_bitvec_bs_l16_as_mut_ptr(
 extern       uint32_t *const rs_bitvec_bs_b32_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first four bytes underlying the bit slice
  * governed by a handle.
@@ -2204,6 +2372,7 @@ extern       uint32_t *const rs_bitvec_bs_b32_as_mut_ptr(
 extern       uint32_t *const rs_bitvec_bs_l32_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first eight bytes underlying the bit slice
  * governed by a handle.
@@ -2213,6 +2382,7 @@ extern       uint32_t *const rs_bitvec_bs_l32_as_mut_ptr(
 extern       uint64_t *const rs_bitvec_bs_b64_as_mut_ptr(
 	const struct BitPtrMut *const self
 );
+
 /**
  * @brief Gets a pointer to the first eight bytes underlying the bit slice
  * governed by a handle.
@@ -2237,6 +2407,7 @@ extern void rs_bitvec_bs_b08_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2251,6 +2422,7 @@ extern void rs_bitvec_bs_l08_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2265,6 +2437,7 @@ extern void rs_bitvec_bs_b16_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2279,6 +2452,7 @@ extern void rs_bitvec_bs_l16_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2293,6 +2467,7 @@ extern void rs_bitvec_bs_b32_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2307,6 +2482,7 @@ extern void rs_bitvec_bs_l32_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2321,6 +2497,7 @@ extern void rs_bitvec_bs_b64_swap(
 	const size_t a,
 	const size_t b
 );
+
 /**
  * @brief Swaps the bit values at two indices in a bit slice.
  * @param[in] self Pointer to a `const` handle of mutable bits.
@@ -2341,36 +2518,43 @@ extern void rs_bitvec_bs_l64_swap(
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_b08_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_l08_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_b16_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_l16_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_b32_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_l32_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
  */
 extern void rs_bitvec_bs_b64_reverse(const struct BitPtrMut *const self);
+
 /**
  * @brief Reverses the bits in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -2401,6 +2585,7 @@ extern bool rs_bitvec_bs_b08_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2425,6 +2610,7 @@ extern bool rs_bitvec_bs_l08_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2449,6 +2635,7 @@ extern bool rs_bitvec_bs_b16_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2473,6 +2660,7 @@ extern bool rs_bitvec_bs_l16_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2497,6 +2685,7 @@ extern bool rs_bitvec_bs_b32_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2521,6 +2710,7 @@ extern bool rs_bitvec_bs_l32_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2545,6 +2735,7 @@ extern bool rs_bitvec_bs_b64_split_at(
 	struct BitPtrImmut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2594,6 +2785,7 @@ extern bool rs_bitvec_bs_b08_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2618,6 +2810,7 @@ extern bool rs_bitvec_bs_l08_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2642,6 +2835,7 @@ extern bool rs_bitvec_bs_b16_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2666,6 +2860,7 @@ extern bool rs_bitvec_bs_l16_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2690,6 +2885,7 @@ extern bool rs_bitvec_bs_b32_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2714,6 +2910,7 @@ extern bool rs_bitvec_bs_l32_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2738,6 +2935,7 @@ extern bool rs_bitvec_bs_b64_split_at_mut(
 	struct BitPtrMut *const other,
 	const size_t mid
 );
+
 /**
  * @brief Splits the slice governed by a handle into two non-overlapping slices
  * each with their own handle.
@@ -2778,6 +2976,7 @@ extern void rs_bitvec_bs_b08_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2793,6 +2992,7 @@ extern void rs_bitvec_bs_l08_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2808,6 +3008,7 @@ extern void rs_bitvec_bs_b16_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2823,6 +3024,7 @@ extern void rs_bitvec_bs_l16_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2838,6 +3040,7 @@ extern void rs_bitvec_bs_b32_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2853,6 +3056,7 @@ extern void rs_bitvec_bs_l32_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2868,6 +3072,7 @@ extern void rs_bitvec_bs_b64_rotate_left(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the front
  * by some amount.
@@ -2899,6 +3104,7 @@ extern void rs_bitvec_bs_b08_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2914,6 +3120,7 @@ extern void rs_bitvec_bs_l08_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2929,6 +3136,7 @@ extern void rs_bitvec_bs_b16_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2944,6 +3152,7 @@ extern void rs_bitvec_bs_l16_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2959,6 +3168,7 @@ extern void rs_bitvec_bs_b32_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2974,6 +3184,7 @@ extern void rs_bitvec_bs_l32_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -2989,6 +3200,7 @@ extern void rs_bitvec_bs_b64_rotate_right(
 	const struct BitPtrMut *const self,
 	const size_t by
 );
+
 /**
  * @brief Rotates the bits in the slice governed by a handle towards the back by
  * some amount.
@@ -3014,6 +3226,7 @@ extern void rs_bitvec_bs_l64_rotate_right(
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b08_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3023,6 +3236,7 @@ extern enum Tristate rs_bitvec_bs_b08_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l08_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3032,6 +3246,7 @@ extern enum Tristate rs_bitvec_bs_l08_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b16_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3041,6 +3256,7 @@ extern enum Tristate rs_bitvec_bs_b16_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l16_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3050,6 +3266,7 @@ extern enum Tristate rs_bitvec_bs_l16_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b32_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3059,6 +3276,7 @@ extern enum Tristate rs_bitvec_bs_b32_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l32_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3068,6 +3286,7 @@ extern enum Tristate rs_bitvec_bs_l32_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b64_all(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3087,6 +3306,7 @@ extern enum Tristate rs_bitvec_bs_l64_all(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b08_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3096,6 +3316,7 @@ extern enum Tristate rs_bitvec_bs_b08_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l08_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3105,6 +3326,7 @@ extern enum Tristate rs_bitvec_bs_l08_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b16_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3114,6 +3336,7 @@ extern enum Tristate rs_bitvec_bs_b16_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l16_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3123,6 +3346,7 @@ extern enum Tristate rs_bitvec_bs_l16_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b32_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3132,6 +3356,7 @@ extern enum Tristate rs_bitvec_bs_b32_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_l32_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3141,6 +3366,7 @@ extern enum Tristate rs_bitvec_bs_l32_any(const struct BitPtrImmut *const self);
  * @retval `Error` `self` is `null`.
  */
 extern enum Tristate rs_bitvec_bs_b64_any(const struct BitPtrImmut *const self);
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3162,6 +3388,7 @@ extern enum Tristate rs_bitvec_bs_l64_any(const struct BitPtrImmut *const self);
 extern enum Tristate rs_bitvec_bs_b08_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3173,6 +3400,7 @@ extern enum Tristate rs_bitvec_bs_b08_not_all(
 extern enum Tristate rs_bitvec_bs_l08_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3184,6 +3412,7 @@ extern enum Tristate rs_bitvec_bs_l08_not_all(
 extern enum Tristate rs_bitvec_bs_b16_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3195,6 +3424,7 @@ extern enum Tristate rs_bitvec_bs_b16_not_all(
 extern enum Tristate rs_bitvec_bs_l16_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3206,6 +3436,7 @@ extern enum Tristate rs_bitvec_bs_l16_not_all(
 extern enum Tristate rs_bitvec_bs_b32_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3217,6 +3448,7 @@ extern enum Tristate rs_bitvec_bs_b32_not_all(
 extern enum Tristate rs_bitvec_bs_l32_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3228,6 +3460,7 @@ extern enum Tristate rs_bitvec_bs_l32_not_all(
 extern enum Tristate rs_bitvec_bs_b64_not_all(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if any bit in the slice governed by a handle is set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3251,6 +3484,7 @@ extern enum Tristate rs_bitvec_bs_l64_not_all(
 extern enum Tristate rs_bitvec_bs_b08_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3262,6 +3496,7 @@ extern enum Tristate rs_bitvec_bs_b08_not_any(
 extern enum Tristate rs_bitvec_bs_l08_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3273,6 +3508,7 @@ extern enum Tristate rs_bitvec_bs_l08_not_any(
 extern enum Tristate rs_bitvec_bs_b16_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3284,6 +3520,7 @@ extern enum Tristate rs_bitvec_bs_b16_not_any(
 extern enum Tristate rs_bitvec_bs_l16_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3295,6 +3532,7 @@ extern enum Tristate rs_bitvec_bs_l16_not_any(
 extern enum Tristate rs_bitvec_bs_b32_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3306,6 +3544,7 @@ extern enum Tristate rs_bitvec_bs_b32_not_any(
 extern enum Tristate rs_bitvec_bs_l32_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3317,6 +3556,7 @@ extern enum Tristate rs_bitvec_bs_l32_not_any(
 extern enum Tristate rs_bitvec_bs_b64_not_any(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if all bits in the slice governed by a handle are set to `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3343,6 +3583,7 @@ extern enum Tristate rs_bitvec_bs_l64_not_any(
 extern enum Tristate rs_bitvec_bs_b08_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3357,6 +3598,7 @@ extern enum Tristate rs_bitvec_bs_b08_some(
 extern enum Tristate rs_bitvec_bs_l08_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3371,6 +3613,7 @@ extern enum Tristate rs_bitvec_bs_l08_some(
 extern enum Tristate rs_bitvec_bs_b16_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3385,6 +3628,7 @@ extern enum Tristate rs_bitvec_bs_b16_some(
 extern enum Tristate rs_bitvec_bs_l16_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3399,6 +3643,7 @@ extern enum Tristate rs_bitvec_bs_l16_some(
 extern enum Tristate rs_bitvec_bs_b32_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3413,6 +3658,7 @@ extern enum Tristate rs_bitvec_bs_b32_some(
 extern enum Tristate rs_bitvec_bs_l32_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3427,6 +3673,7 @@ extern enum Tristate rs_bitvec_bs_l32_some(
 extern enum Tristate rs_bitvec_bs_b64_some(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Tests if the slice governed by a handle as some `0` bits and some `1`
  * bits.
@@ -3448,42 +3695,49 @@ extern enum Tristate rs_bitvec_bs_l64_some(
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_b08_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_l08_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_b16_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_l16_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_b32_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_l32_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
  * @return The number of bits in the slice that are set to `1`.
  */
 extern size_t rs_bitvec_bs_b64_count_ones(const struct BitPtrImmut *const self);
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `1`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3499,6 +3753,7 @@ extern size_t rs_bitvec_bs_l64_count_ones(const struct BitPtrImmut *const self);
 extern size_t rs_bitvec_bs_b08_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3507,6 +3762,7 @@ extern size_t rs_bitvec_bs_b08_count_zeros(
 extern size_t rs_bitvec_bs_l08_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3515,6 +3771,7 @@ extern size_t rs_bitvec_bs_l08_count_zeros(
 extern size_t rs_bitvec_bs_b16_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3523,6 +3780,7 @@ extern size_t rs_bitvec_bs_b16_count_zeros(
 extern size_t rs_bitvec_bs_l16_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3531,6 +3789,7 @@ extern size_t rs_bitvec_bs_l16_count_zeros(
 extern size_t rs_bitvec_bs_b32_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3539,6 +3798,7 @@ extern size_t rs_bitvec_bs_b32_count_zeros(
 extern size_t rs_bitvec_bs_l32_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3547,6 +3807,7 @@ extern size_t rs_bitvec_bs_l32_count_zeros(
 extern size_t rs_bitvec_bs_b64_count_zeros(
 	const struct BitPtrImmut *const self
 );
+
 /**
  * @brief Counts how many bits in the slice governed by a handle are `0`.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3565,6 +3826,7 @@ extern void rs_bitvec_bs_b08_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3574,6 +3836,7 @@ extern void rs_bitvec_bs_l08_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3583,6 +3846,7 @@ extern void rs_bitvec_bs_b16_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3592,6 +3856,7 @@ extern void rs_bitvec_bs_l16_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3601,6 +3866,7 @@ extern void rs_bitvec_bs_b32_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3610,6 +3876,7 @@ extern void rs_bitvec_bs_l32_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3619,6 +3886,7 @@ extern void rs_bitvec_bs_b64_set_all(
 	const struct BitPtrMut *const self,
 	const bool value
 );
+
 /**
  * @brief Sets all bits in the slice governed by a handle to a given value.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3640,6 +3908,7 @@ extern void rs_bitvec_bs_b08_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3651,6 +3920,7 @@ extern void rs_bitvec_bs_l08_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3662,6 +3932,7 @@ extern void rs_bitvec_bs_b16_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3673,6 +3944,7 @@ extern void rs_bitvec_bs_l16_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3684,6 +3956,7 @@ extern void rs_bitvec_bs_b32_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3695,6 +3968,7 @@ extern void rs_bitvec_bs_l32_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3706,6 +3980,7 @@ extern void rs_bitvec_bs_b64_for_each(
 	const struct BitPtrMut *const self,
 	bool (*const func)(const size_t index, const bool value)
 );
+
 /**
  * @brief Runs a function for each bit index in the slice governed by a handle.
  * @param[in] self Pointer to a `const` handle over mutable bits.
@@ -3729,6 +4004,7 @@ extern const uint8_t  *const rs_bitvec_bs_b08_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3740,6 +4016,7 @@ extern const uint8_t  *const rs_bitvec_bs_l08_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3751,6 +4028,7 @@ extern const uint16_t *const rs_bitvec_bs_b16_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3762,6 +4040,7 @@ extern const uint16_t *const rs_bitvec_bs_l16_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3773,6 +4052,7 @@ extern const uint32_t *const rs_bitvec_bs_b32_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3784,6 +4064,7 @@ extern const uint32_t *const rs_bitvec_bs_l32_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3795,6 +4076,7 @@ extern const uint64_t *const rs_bitvec_bs_b64_as_slice(
 	const struct BitPtrImmut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a pointer/length pair to the storage elements underlying a slice.
  * @param[in] self Pointer to a `const` handle over const bits.
@@ -3819,6 +4101,7 @@ extern       uint8_t  *const rs_bitvec_bs_b08_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3831,6 +4114,7 @@ extern       uint8_t  *const rs_bitvec_bs_l08_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3843,6 +4127,7 @@ extern       uint16_t *const rs_bitvec_bs_b16_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3855,6 +4140,7 @@ extern       uint16_t *const rs_bitvec_bs_l16_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3867,6 +4153,7 @@ extern       uint32_t *const rs_bitvec_bs_b32_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3879,6 +4166,7 @@ extern       uint32_t *const rs_bitvec_bs_l32_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.
@@ -3891,6 +4179,7 @@ extern       uint64_t *const rs_bitvec_bs_b64_as_mut_slice(
 	const struct BitPtrMut *const self,
 	size_t *const len
 );
+
 /**
  * @brief Gets a write pointer/length pair to the storage elements underlying a
  * bit slice.

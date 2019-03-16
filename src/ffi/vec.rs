@@ -694,8 +694,11 @@ fn rs_bitvec_bv_l16_push(this: *mut BitVec<LittleEndian, u16>, value: bool) {
 #[no_mangle]
 pub unsafe extern "C"
 fn rs_bitvec_bv_b32_push(this: *mut BitVec<BigEndian, u32>, value: bool) {
+	dbg!(this);
 	if this.is_null() { return; }
+	dbg!(&*this);
 	(&mut *this).push(value);
+	dbg!(&*this);
 }
 #[no_mangle]
 pub unsafe extern "C"
@@ -1011,6 +1014,81 @@ pub unsafe extern "C"
 fn rs_bitvec_bv_l64_set_elements(this: *mut BitVec<LittleEndian, u64>, element: u64) {
 	if this.is_null() { return; }
 	(&mut *this).set_elements(element);
+}
+
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b08_clone_from(
+	this: *mut BitVec<BigEndian, u8>,
+	source: *const BitVec<BigEndian, u8>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l08_clone_from(
+	this: *mut BitVec<LittleEndian, u8>,
+	source: *const BitVec<LittleEndian, u8>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b16_clone_from(
+	this: *mut BitVec<BigEndian, u16>,
+	source: *const BitVec<BigEndian, u16>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l16_clone_from(
+	this: *mut BitVec<LittleEndian, u16>,
+	source: *const BitVec<LittleEndian, u16>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b32_clone_from(
+	this: *mut BitVec<BigEndian, u32>,
+	source: *const BitVec<BigEndian, u32>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l32_clone_from(
+	this: *mut BitVec<LittleEndian, u32>,
+	source: *const BitVec<LittleEndian, u32>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_b64_clone_from(
+	this: *mut BitVec<BigEndian, u64>,
+	source: *const BitVec<BigEndian, u64>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
+}
+#[cfg(target_pointer_width = "64")]
+#[no_mangle]
+pub unsafe extern "C"
+fn rs_bitvec_bv_l64_clone_from(
+	this: *mut BitVec<LittleEndian, u64>,
+	source: *const BitVec<LittleEndian, u64>
+) {
+	nullck!(this, source);
+	ptr::write(this, (&*source).clone());
 }
 
 #[no_mangle]

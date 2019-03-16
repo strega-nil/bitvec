@@ -5,7 +5,8 @@
 #include <cstdint>
 
 #include <array>
-#include <functional>
+#include <type_traits>
+#include <utility>
 
 #include <bitvec/bitslice.h>
 
@@ -432,7 +433,8 @@ namespace impl {
  * Type parameters:
  *
  * `Cursor C`: The cursor type parameter of the handle class calling this.
- * `class T`: The storage type parameter of the handle class calling this.
+ * `class T`: The storage type parameter of the handle class calling this. This
+ * type must satisfy `std::is_integral`.
  * `class Ret`: The return type of the dispatched function.
  * `class... Params`: The parameter types of the dispatched function.
  * `class... Args`: The argument types of the arguments given to the mux call.
@@ -487,13 +489,12 @@ static BitPtrImmut * make_immut(BitPtrImmut * bp) {
 } // namespace impl
 
 /**
- * @class BitSliceHandle<Cursor C, class T>
+ * @class BitSliceHandle
  *
- * @brief Template for all the handles to bit slices with permutations of cursor
- * and storage types.
+ * @brief Handle to a collection of ordered bits, without any memory management.
  *
- * This handle does NOT own the memory it govers, and WILL NOT attempt to
- * deallocate it on drop.
+ * This handle does NOT own the memory it governs, and WILL NOT attempt to
+ * deallocate it on destruction.
  *
  * When it is constructed from `T const *` pointers to `const` data, it is
  * copyable; when constructed from `T *` pointers to mutable data, it is *not*.
@@ -508,17 +509,17 @@ static BitPtrImmut * make_immut(BitPtrImmut * bp) {
  * - `BitSliceHandle<Cursor::LittleEndian, uint32_t>`
  * - `BitSliceHandle<Cursor::BigEndian,    uint64_t>`
  * - `BitSliceHandle<Cursor::LittleEndian, uint64_t>`
- *
- * Note that C++ will allow you to use any type as the second parameter, and so
- * long as it is `1`, `2`, `4`, or `8` bytes in size, it will work. For example,
- * `float32_t` and `float64_t` will compile, as will pointers.
- *
- * Doing so may result in invalid bit patterns for the requested type, which may
- * induce Undefined Behavior.
  */
 template <Cursor C, class T>
-class BitSliceHandle :
-	public std::conditional<std::is_const<T>::value, BitPtrImmut, BitPtrMut>::type {
+class BitSliceHandle : public std::conditional<
+	std::is_const<T>::value,
+	BitPtrImmut,
+	BitPtrMut
+>::type {
+	static_assert(
+		std::is_integral<T>::value && std::is_unsigned<T>::value,
+		"BitSliceHandle can only be constructed with unsigned integral storage types"
+	);
 public:
 	/**
 	 * @brief Default constructor for the slice handle. Produces an empty slice.
@@ -526,6 +527,7 @@ public:
 	explicit BitSliceHandle(void) noexcept {
 		impl::mux<C, T>(func::bs::empty, impl::make_immut(this));
 	}
+
 	/**
 	 * @brief Standard constructor for the slice handle. Produces a slice of
 	 * constant bits.
@@ -539,6 +541,7 @@ public:
 			*this = BitSliceHandle();
 		}
 	}
+
 	/**
 	 * @brief Standard constructor for the slice handle. Produces a slice of
 	 * mutable bits.
@@ -552,6 +555,7 @@ public:
 			*this = BitSliceHandle();
 		}
 	}
+
 	/**
 	 * @brief Detailed constructor for the slice handle. Produces a slice of
 	 * constant bits.
@@ -574,6 +578,7 @@ public:
 			*this = BitSliceHandle(ptr, len);
 		}
 	}
+
 	/**
 	 * @brief Detailed constructor for the slice handle. Produces a slice of
 	 * mutable bits.
@@ -593,6 +598,25 @@ public:
 		)) {
 			*this = BitSliceHandle(ptr, len);
 		}
+	}
+
+	/**
+	 * @brief Copy constructor.
+	 * @param other `BitSliceHandle` to duplicate.
+	 */
+	BitSliceHandle(BitSliceHandle const& other) noexcept {
+		*this = other;
+	}
+
+	/**
+	 * @brief Copy assignment operator,
+	 * @param other `BitSliceHandle` from to duplicate.
+	 */
+	BitSliceHandle& operator=(BitSliceHandle const& other) noexcept {
+		if (&other != this) {
+			*impl::make_immut(this) = *impl::make_immut(&other);
+		}
+		return *this;
 	}
 
 	/**
@@ -642,8 +666,8 @@ public:
 	 * @retval `False` The slice was not empty, and the first bit was `0`.
 	 * @retval `True` The slice was not empty, and the first bit was `1`.
 	 */
-	Tristate pop_front(void) noexcept {
-		return impl::mux<C, T>(func::bs::split_first, make_immut(this));
+	virtual Tristate pop_front(void) noexcept {
+		return impl::mux<C, T>(func::bs::split_first, impl::make_immut(this));
 	}
 
 	/**
@@ -653,8 +677,8 @@ public:
 	 * @retval `False` The slice was not empty, and the lats bit was `0`.
 	 * @retval `True` The slice was not empty, and the last bit was `1`.
 	 */
-	Tristate pop_back(void) noexcept {
-		return impl::mux<C, T>(func::bs::split_last, make_immut(this));
+	virtual Tristate pop_back(void) noexcept {
+		return impl::mux<C, T>(func::bs::split_last, impl::make_immut(this));
 	}
 
 	/**

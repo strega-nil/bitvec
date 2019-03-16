@@ -1962,7 +1962,9 @@ pub unsafe extern "C"
 fn rs_bitvec_bs_b32_len(
 	this: *const *const BitSlice<BigEndian, u32>,
 ) -> usize {
+	dbg!(this);
 	nullck!(this => 0);
+	dbg!((&**this).len());
 	(&**this).len()
 }
 /** Computes the length, in bits, of a bit slice behind a handle.

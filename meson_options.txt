@@ -1,0 +1,20 @@
+option(
+  'std',
+  type: 'feature',
+  value: 'auto',
+  description: 'Use the std crate'
+)
+
+option(
+  'alloc',
+  type: 'feature',
+  value: 'auto',
+  description: 'Use allocation'
+)
+
+option(
+  'ffi',
+  type: 'feature',
+  value: 'disabled',
+  description: 'Compile the FFI bindings in'
+)
